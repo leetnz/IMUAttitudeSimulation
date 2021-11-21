@@ -1,6 +1,6 @@
 function [imu] = simulateIMU(sim)
     aOffsets = 0.01 * randn(1, 2);
-    aNoise = 0.0005 - 0.0010 * rand(1, 2);
+    aNoise = 0.005 - 0.0010 * rand(1, 2);
 
     gOffset = 2*pi/(360) * (1 - 2 * rand(1)); % 1 degree per second
     gNoise = 2*pi/(1000) * (2 - 4 * rand(1));

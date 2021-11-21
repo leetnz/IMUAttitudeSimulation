@@ -3,6 +3,7 @@ setup;
 inputSinusoid;
 % inputRamps;
 
+
 simulate;
 
 % figure; plot(t, ddxsim, t, u);
@@ -21,6 +22,6 @@ estGyro = estimatorGyro(dt, imu, sim.theta(1));
 est = estimator(dt, imu, sim.theta(1));
 
 figure; plot(sim.t, est.theta, sim.t, est.thetaAcc, sim.t, wrapPiToNegPi(estGyro.theta), sim.t, wrapPiToNegPi(sim.theta));
-legend(["kFilter", "accel only", "gyro only", "sim"]);
+legend(["estimator", "accel only", "gyro only", "sim"]);
 
-figure; plot(sim.t, est.absAcc, sim.t, est.trust);
+%figure; plot(sim.t, est.absAcc, sim.t, est.trust);

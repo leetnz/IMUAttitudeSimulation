@@ -26,10 +26,10 @@ function [est] = estimator(dt, imu, theta0)
 
         % Trust model (how much we trust the motion model)
         absAcc = (imu.acc.y(i)^2 + imu.acc.z(i)^2);
-        
+
         est.absAcc(i) = absAcc;
         
-        obsTrust = max(0, 1 - 20 * abs(absAcc-1)) * max(0, 1 - 5 * abs(imu.gyro.dtheta(i)));
+        obsTrust = max(0, 1 - 5 * abs(absAcc-1)) * max(0, 1 - 2.5 * abs(imu.gyro.dtheta(i)));
         trust = obsTrust * baseAccFilterCoeff;
 
         est.trust(i) = trust;
