@@ -3,8 +3,8 @@ setup;
 inputSinusoid;
 % inputRamps;
 
-u(:,1) = 0.1*u(:,1);
-u(:,2) = 0.1*u(:,2);
+% u(:,1) = 0.1*u(:,1);
+% u(:,2) = 0.1*u(:,2);
 % u(:,3) = 0*u(:,3);
 simulate;
 
@@ -38,12 +38,17 @@ aest = estimatorAccel(dt, imus(1), sim.theta(1));
 aests=horzcat(aest);
 clear aest;
 
+START_ERR_STDDEV = (pi/180);
+
 for i = 1:MC_RUNS
-    ests(i) = estimator(dt, imus(i), sim.theta(1));
-    gests(i) = estimatorGyro(dt, imus(i), sim.theta(1));
-    aests(i) = estimatorAccel(dt, imus(i), sim.theta(1));
+    thetaStart = START_ERR_STDDEV * randn(1);
+    ests(i) = estimator(dt, imus(i), thetaStart);
+    gests(i) = estimatorGyro(dt, imus(i), thetaStart);
+    aests(i) = estimatorAccel(dt, imus(i), thetaStart);
 end
 
-plotMCEst(sim, ests, gests, aests);
+% plotMCEst(sim, ests, gests, aests);
+% plotMCMeanSqErr(sim, ests, gests, aests);
+plotMCEstAggregate(sim, ests, gests, aests);
 
 
